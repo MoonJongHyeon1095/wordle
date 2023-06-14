@@ -1,6 +1,6 @@
 let attempt = 0;
 let index = 0;
-const answerWord = "apple";
+// const answerWord = "apple";
 
 function appStart() {
   const displayGameover = () => {
@@ -22,14 +22,17 @@ function appStart() {
     index = 0;
   };
 
-  const handleEnter = () => {
+  const handleEnter = async () => {
     let hit = 0;
+
+    const 응답 = await fetch("/answer");
+    const answerWord = await 응답.json();
 
     for (let i = 0; i < 5; i++) {
       const block = document.querySelector(
         `.board-column[data-index='${attempt}${i}']`
       );
-      console.log(block);
+
       const input = block.innerText;
       const answer = answerWord[i];
 
@@ -67,9 +70,6 @@ function appStart() {
     );
 
     if (index === 5 && keyCode !== 13) return;
-
-    console.log(index);
-    console.log(key, keyCode);
 
     switch (true) {
       case keyCode === 13:
