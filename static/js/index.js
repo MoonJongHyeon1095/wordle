@@ -1,9 +1,10 @@
 let attempt = 0;
 let index = 0;
 const answerWord = "apple";
-let timer;
 
 function appStart() {
+  updateClock();
+
   const displayGameover = () => {
     const div = document.createElement("div");
     div.innerText = "게임종료";
@@ -47,17 +48,26 @@ function appStart() {
         hit += 1;
         block.style.background = "#6AAA64";
         keyBlock.style.background = "#6AAA64";
+        block.classList.add("correct-animation");
+        keyBlock.classList.add("correct-animation");
       } else if (answerWord.includes(input)) {
         block.style.background = "#C9B458";
         keyBlock.style.background = "#C9B458";
+        block.classList.add("partial-animation");
+        keyBlock.classList.add("partial-animation");
       } else {
         block.style.background = "#787C7E";
         keyBlock.style.background = "#787C7E";
+        block.classList.add("wrong-animation");
+        keyBlock.classList.add("wrong-animation");
       }
     }
 
-    if (hit === 5) gameOver();
-    else nextLine();
+    if (hit === 5) {
+      gameOver();
+    } else {
+      nextLine();
+    }
   };
 
   const handleBackspace = () => {
@@ -94,6 +104,21 @@ function appStart() {
   };
 
   window.addEventListener("keydown", handleKeydown);
+}
+
+function updateClock() {
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+  };
+
+  let currentDate = new Date().toLocaleString("ko-KR", options);
+  const clockDisplay = document.getElementById("date");
+  clockDisplay.textContent = currentDate;
 }
 
 appStart();

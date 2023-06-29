@@ -22,3 +22,42 @@ main {
   width: 60px;
   height: 60px;
 }
+
+.correct-animation {
+  animation: correct 0.5s infinite alternate;
+}
+
+.partial-animation {
+  animation: partial 0.5s infinite alternate;
+}
+
+.wrong-animation {
+  animation: wrong 0.5s infinite alternate;
+}
+
+@keyframes correct {
+  from {
+    background-color: #6aaa64;
+  }
+  to {
+    background-color: inherit;
+  }
+}
+
+@keyframes partial {
+  from {
+    background-color: #c9b458;
+  }
+  to {
+    background-color: inherit;
+  }
+}
+
+@keyframes wrong {
+  from {
+    background-color: #787c7e;
+  }
+  to {
+    background-color: inherit;
+  }
+}

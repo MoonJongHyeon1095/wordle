@@ -25,4 +25,4 @@ function updateClock() {
   clockDisplay.textContent = currentDate;
 }
 
-setInterval(updateClock, 1000);
+setInterval(updateClock(), 1000);
