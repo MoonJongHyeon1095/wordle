@@ -1,6 +1,7 @@
 let attempt = 0;
 let index = 0;
-// const answerWord = "apple";
+const answerWord = "apple";
+let timer;
 
 function appStart() {
   const displayGameover = () => {
@@ -25,8 +26,8 @@ function appStart() {
   const handleEnter = async () => {
     let hit = 0;
 
-    const 응답 = await fetch("/answer");
-    const answerWord = await 응답.json();
+    // const 응답 = await fetch("answer");
+    // const answerWord = await 응답.json();
 
     for (let i = 0; i < 5; i++) {
       const block = document.querySelector(
@@ -34,22 +35,29 @@ function appStart() {
       );
 
       const input = block.innerText;
-      const answer = answerWord[i];
+      const answerChar = answerWord[i];
+      const inputKey = input.toUpperCase();
+      const keyBlock = document.querySelector(
+        `.keyboard-column[data-key='${inputKey}']`
+      );
 
       block.style.color = "white";
 
-      if (input === answer) {
+      if (input === answerChar) {
         hit += 1;
         block.style.background = "#6AAA64";
+        keyBlock.style.background = "#6AAA64";
       } else if (answerWord.includes(input)) {
         block.style.background = "#C9B458";
+        keyBlock.style.background = "#C9B458";
       } else {
         block.style.background = "#787C7E";
+        keyBlock.style.background = "#787C7E";
       }
     }
 
     if (hit === 5) gameOver();
-    else nextLine(attempt);
+    else nextLine();
   };
 
   const handleBackspace = () => {
